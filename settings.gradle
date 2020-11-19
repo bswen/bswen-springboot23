@@ -1,0 +1,3 @@
+rootProject.name = 'bswen-springboot23'
+include 'app1'
+include 'app2'
