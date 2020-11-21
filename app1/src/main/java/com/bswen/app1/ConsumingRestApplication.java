@@ -7,7 +7,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.client.RestTemplate;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @SpringBootApplication
 public class ConsumingRestApplication {
@@ -15,6 +19,7 @@ public class ConsumingRestApplication {
     public static void main(String[] args) {
         SpringApplication.run(ConsumingRestApplication.class,args);
     }
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
