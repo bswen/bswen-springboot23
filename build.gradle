@@ -20,8 +20,8 @@ buildscript {
 
 plugins {
     id 'org.springframework.boot' version '2.3.2.RELEASE' apply false
-    id 'io.spring.dependency-management' version '1.0.8.RELEASE' apply false
-    id 'java'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE' apply false
+//    id 'java'
 }
 
 repositories {
@@ -33,5 +33,10 @@ repositories {
     maven { url 'https://maven.aliyun.com/repository/spring-plugin/' }
 
     mavenCentral()
+
+    maven { url 'https://repo.spring.io/milestone' }
 }
 
+ext {
+    set('springCloudVersion', "Hoxton.SR6")
+}

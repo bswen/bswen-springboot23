@@ -1,0 +1,1 @@
+demo spring cloud config server usage with gradle

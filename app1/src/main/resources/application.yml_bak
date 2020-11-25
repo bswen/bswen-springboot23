@@ -1,0 +1,4 @@
+### this property is deprecated, now read from config server.
+#spring:
+#  main:
+#    web-application-type: NONE
