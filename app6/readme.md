@@ -1,0 +1,1 @@
+demo use of spring cloud kubernetes that using configmap as the config server

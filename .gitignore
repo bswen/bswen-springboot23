@@ -18,6 +18,7 @@ build
 *.war
 *.nar
 *.ear
+*/k8s/*
 *.zip
 *.tar.gz
 *.rar
@@ -26,4 +27,5 @@ build
 hs_err_pid*
 
 **/application-dev.properties
+**/application-dev.yml
 **/application-native.properties

@@ -2,9 +2,11 @@ package com.bswen.app1;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -21,6 +23,9 @@ public class ConsumingRestApplication {
     }
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
+    @Value("${message}")
+    private String message;
+
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
         return builder.build();
@@ -32,7 +37,7 @@ public class ConsumingRestApplication {
             Greeting greeting =
                     restTemplate.getForObject("http://localhost:8080/greeting",
                             Greeting.class);
-            log.info("got rest call result {}",greeting);
+            log.info("got rest call result {} message {}",greeting,message);
         };
     }
 }

@@ -1,0 +1,23 @@
+management:
+  endpoint:
+    restart.enabled : true
+    health.enabled : true
+    info.enabled : true
+
+server:
+  port: 8082
+
+spring:
+  application:
+    name: app6
+  cloud:
+    kubernetes:
+      reload:
+        period: 15
+        enabled: true
+      config:
+        enabled: true
+        name: app6
+        namespace: ns-bswen
+        sources:
+          - name: config-app6
