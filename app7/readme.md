@@ -1,0 +1,1 @@
+demo use spring boot with kubernetes service discovery.
