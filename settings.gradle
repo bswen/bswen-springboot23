@@ -8,4 +8,7 @@ include 'app6'
 include 'app7'
 include 'app7'
 include 'app8'
+include 'app9-cactoos'
+include 'app9-cactoos'
+include 'app9'
 
