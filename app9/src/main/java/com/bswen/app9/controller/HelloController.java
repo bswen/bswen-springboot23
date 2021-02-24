@@ -16,4 +16,19 @@ public class HelloController {
     public String hello(Authentication authentication) {
         return "hello";
     }
+
+    @GetMapping("/login")
+    public String login(Authentication authentication) {
+        return "login";
+    }
+
+    @GetMapping("/home")
+    public String home(Authentication authentication) {
+        return "home";
+    }
+
+    @GetMapping("/")
+    public String root(Authentication authentication) {
+        return "home";
+    }
 }
