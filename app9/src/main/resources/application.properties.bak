@@ -1,0 +1,10 @@
+spring.jpa.database-platform = org.hibernate.dialect.SQLiteDialect
+spring.jpa.hibernate.ddl-auto = update
+
+spring.datasource.url = jdbc:sqlite:mydb.db
+spring.datasource.driver-class-name = org.sqlite.JDBC
+
+spring.datasource.username =
+spring.datasource.password =
+
+my.booleanValue = true

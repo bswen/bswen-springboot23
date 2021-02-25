@@ -1,0 +1,12 @@
+my:
+  booleanValue: true
+spring:
+  datasource:
+    driver-class-name: org.sqlite.JDBC
+    password: ''
+    url: jdbc:sqlite:mydb.db
+    username: ''
+  jpa:
+    database-platform: org.hibernate.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: update
