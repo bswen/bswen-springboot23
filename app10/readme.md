@@ -1,0 +1,1 @@
+demo how to connect to multiple redis by using spring boot 

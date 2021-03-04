@@ -11,4 +11,5 @@ include 'app8'
 include 'app9-cactoos'
 include 'app9-cactoos'
 include 'app9'
+include 'app10'
 
