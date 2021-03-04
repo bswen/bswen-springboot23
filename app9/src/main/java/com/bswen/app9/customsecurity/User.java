@@ -1,6 +1,7 @@
 package com.bswen.app9.customsecurity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "tbl_user")
@@ -14,6 +15,9 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private EncryptionAlgorithm algorithm;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Authority> authorities;
 
     public Integer getId() {
         return id;
@@ -45,5 +49,13 @@ public class User {
 
     public void setAlgorithm(EncryptionAlgorithm algorithm) {
         this.algorithm = algorithm;
+    }
+
+    public List<Authority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(List<Authority> authorities) {
+        this.authorities = authorities;
     }
 }

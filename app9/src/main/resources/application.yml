@@ -1,5 +1,12 @@
 my:
   booleanValue: true
+logging:
+  pattern:
+    console: "%d %-5level %logger : %msg%n"
+  level:
+    org.springframework.web: DEBUG
+    guru.springframework.controllers: DEBUG
+    org.hibernate: DEBUG
 spring:
   datasource:
     driver-class-name: org.sqlite.JDBC
