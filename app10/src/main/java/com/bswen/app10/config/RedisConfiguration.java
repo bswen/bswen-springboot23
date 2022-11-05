@@ -1,79 +1,37 @@
 package com.bswen.app10.config;
 
-import com.bswen.app10.domain.RoleRedisProperty;
-import com.bswen.app10.domain.UserRedisProperty;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import io.lettuce.core.RedisClient;
+import io.lettuce.core.RedisURI;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
-import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
+@ConfigurationProperties("spring.redis")
 public class RedisConfiguration {
+    private String host;
+    private int port;
 
-    @Autowired
-    private UserRedisProperty userRedisProperty;
-
-    @Autowired
-    private RoleRedisProperty roleRedisProperty;
-
-    @Primary
-    @Bean(name = "userRedisConnectionFactory")
-    public RedisConnectionFactory userRedisConnectionFactory() {
-        RedisStandaloneConfiguration config = new RedisStandaloneConfiguration(
-                userRedisProperty.getHost(), userRedisProperty.getPort());
-        return new JedisConnectionFactory(config);
+    @Bean
+    RedisClient redisClient() {
+        RedisURI uri = RedisURI.Builder.redis(this.host, this.port)
+                .build();
+        return RedisClient.create(uri);
     }
 
-    @Bean(name = "userStringRedisTemplate")
-    public StringRedisTemplate userStringRedisTemplate(@Qualifier("userRedisConnectionFactory") RedisConnectionFactory cf) {
-        StringRedisTemplate stringRedisTemplate = new StringRedisTemplate();
-        stringRedisTemplate.setConnectionFactory(cf);
-        return stringRedisTemplate;
+    public String getHost() {
+        return host;
     }
 
-    @Bean(name = "userRedisTemplate")
-    public RedisTemplate userRedisTemplate(@Qualifier("userRedisConnectionFactory") RedisConnectionFactory cf) {
-        StringRedisTemplate stringRedisTemplate = new StringRedisTemplate();
-        stringRedisTemplate.setConnectionFactory(cf);
-        //setSerializer(stringRedisTemplate);
-        return stringRedisTemplate;
+    public void setHost(String host) {
+        this.host = host;
     }
 
-    @Bean(name = "roleRedisConnectionFactory")
-    public RedisConnectionFactory roleRedisConnectionFactory() {
-        RedisStandaloneConfiguration config = new RedisStandaloneConfiguration(
-                roleRedisProperty.getHost(), roleRedisProperty.getPort());
-        return new JedisConnectionFactory(config);
+    public int getPort() {
+        return port;
     }
 
-    @Bean(name = "roleStringRedisTemplate")
-    public StringRedisTemplate roleStringRedisTemplate(@Qualifier("roleRedisConnectionFactory") RedisConnectionFactory cf) {
-        StringRedisTemplate stringRedisTemplate = new StringRedisTemplate();
-        stringRedisTemplate.setConnectionFactory(cf);
-        return stringRedisTemplate;
+    public void setPort(int port) {
+        this.port = port;
     }
-
-    @Bean(name = "roleRedisTemplate")
-    public RedisTemplate roleRedisTemplate(@Qualifier("roleRedisConnectionFactory") RedisConnectionFactory cf) {
-        StringRedisTemplate stringRedisTemplate = new StringRedisTemplate();
-        stringRedisTemplate.setConnectionFactory(cf);
-        //setSerializer(stringRedisTemplate);
-        return stringRedisTemplate;
-    }
-
-    private void setSerializer(RedisTemplate<String, String> template) {
-        template.setDefaultSerializer(new GenericJackson2JsonRedisSerializer());
-        template.setKeySerializer(new StringRedisSerializer());
-        template.setHashKeySerializer(new GenericJackson2JsonRedisSerializer());
-        template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
-    }
-
 }

@@ -16,10 +16,9 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation('org.springframework.boot:spring-boot-starter-data-redis') {
-        exclude group: 'io.lettuce', module: 'lettuce-core'
-    }
-    implementation 'redis.clients:jedis:2.9.0'
+    implementation('org.springframework.boot:spring-boot-starter-data-redis')
+    implementation 'io.lettuce:lettuce-core'
+    implementation 'org.apache.commons:commons-pool2'
 
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
@@ -27,8 +26,14 @@ dependencies {
 }
 
 test {
+    systemProperty 'spring.profiles.active', 'test'
     useJUnitPlatform()
+    reports {
+        junitXml.enabled = true
+        html.enabled = false
+    }
 }
+
 dependencyManagement {
     imports {
         mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
